@@ -3,16 +3,18 @@ package utility.actionBase;
 public interface Action {
      boolean isStarted();
      boolean isFinished();
-     boolean interruptable();
+     boolean isInterruptible();
 
      void start();
-
      void update();
      void stop();
 
-     default void inturrpt(){
-         if (interruptable()) stop();
+     void setStarted(boolean started);
+     void setFinished(boolean finished);
+
+     default void interrupt() {
+          if (isInterruptible()) {
+               setFinished(true);
+          }
      }
-
-
 }
